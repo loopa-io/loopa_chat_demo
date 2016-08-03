@@ -9,7 +9,7 @@ class Chat extends React.Component {
   }
 
   componentDidMount(){
-    const server = new WebSocket(`wss://${location.hostname}:${location.port}/messages`)
+    const server = new WebSocket(`ws://localhost:3000/messages`)
     const user = localStorage.getItem("user") ||  prompt("¿Cuál es tu nombre?")
     const color = localStorage.getItem("color") ||  randomColor()
 
@@ -26,7 +26,7 @@ class Chat extends React.Component {
     }
 
     server.onmessage = e => {
-      const messages = JSON.parse(e.data).map(msg => JSON.parse(msg))
+      const messages = JSON.parse(e.data)
       this.setState({ messages })
       window.scrollTo(0, document.body.scrollHeight)
     }

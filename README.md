@@ -1,31 +1,19 @@
 # react-crystal-demo
 
-TODO: Write a description here
+Chat desarrollado con Crystal y React.
 
 ## Installation
 
-
-TODO: Write installation instructions here
+* `shards install`
+* `npm install`
 
 
 ## Usage
 
-
-
-TODO: Write usage instructions here
+`./app --port <port-number>`
 
 ## Development
 
-TODO: Write development instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[your-github-name]/react-crystal-demo/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
-
-## Contributors
-
-- [[your-github-name]](https://github.com/[your-github-name]) Angarsk8 - creator, maintainer
+* `npm run dev`
+* `crystal src/app.cr`
+* `open http://localhost:8080`

@@ -1,6 +1,6 @@
 require "kemal"
 
-messages = [] of String
+messages = [] of JSON::Any
 sockets  = [] of HTTP::WebSocket
 
 public_folder "src/assets"
@@ -16,7 +16,7 @@ ws "/messages" do |socket|
 
   socket.on_message do |message|
     puts "recibiendo mensaje: #{message}"
-    messages.push message
+    messages.push JSON.parse(message)
 
     sockets.each do |_socket|
       _socket.send messages.to_json

@@ -7,6 +7,8 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: [
     "./js/app.js",
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080/'
   ],
   module: {
     loaders: [
