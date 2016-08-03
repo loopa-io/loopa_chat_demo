@@ -1,0 +1,5 @@
+/doc/
+/libs/
+/node_modules/
+/.crystal/
+/.shards/
