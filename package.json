@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base=client/dist --inline --watch --hot "
+    "prod": "export NODE_ENV=production && ./node_modules/.bin/webpack && cp -r client/dist/* src/assets/."
   },
   "author": "Andrés García <andres@loopa.io>",
   "license": "ISC",

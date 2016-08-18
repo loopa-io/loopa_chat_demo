@@ -6,7 +6,7 @@ sockets  = [] of HTTP::WebSocket
 public_folder "src/assets"
 
 get "/" do
-  render "src/views/index.ecr"
+  File.read("src/assets/index.html")
 end
 
 ws "/messages" do |socket|

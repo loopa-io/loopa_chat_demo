@@ -1,6 +1,6 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import randomColor from "randomcolor"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import randomColor from 'randomcolor'
 
 class Chat extends React.Component {
   constructor(props){
@@ -9,18 +9,23 @@ class Chat extends React.Component {
   }
 
   componentDidMount(){
-    const server = new WebSocket(`ws://localhost:3000/messages`)
-    const user = localStorage.getItem("user") ||  prompt("¿Cuál es tu nombre?")
-    const color = localStorage.getItem("color") ||  randomColor()
+    const { hostname, port } = location
+    const lS = localStorage
 
-    localStorage.setItem("user", user)
-    localStorage.setItem("color", color)
+    const server = new WebSocket(`ws://localhost:3000/messages`)
+    // const server = new WebSocket(`ws://${hostname}:${port}/messages`)
+
+    const user  = lS.getItem('user')  || prompt('¿Cuál es tu nombre?')
+    const color = lS.getItem('color') || randomColor({luminosity: 'dark'})
+
+    lS.setItem('user'  , user)
+    lS.setItem('color' , color)
 
     server.onopen = () => {
       const message = {
-        username: user,
-        color: color,
-        message: "Se unió a la sala."
+        username : user ,
+        color    : color,
+        message  : 'Se unió a la sala.'
       }
       server.send(JSON.stringify(message))
     }
@@ -32,18 +37,18 @@ class Chat extends React.Component {
     }
 
     this.server = server
-    this.user = user
-    this.color = color
+    this.user   = user
+    this.color  = color
   }
 
   sendMessage(){
     const message = {
-      username: this.user,
-      color: this.color,
-      message: this.refs.message.value
+      username : this.user ,
+      color    : this.color,
+      message  : this.refs.message.value
     }
     this.server.send(JSON.stringify(message))
-    this.refs.message.value = ""
+    this.refs.message.value = ''
   }
 
   handleEnter(e){
@@ -58,19 +63,28 @@ class Chat extends React.Component {
         <ul>
           {this.state.messages.map((message, i) => {
             return (
-              <li key={i}>
-                <span style={{ color: message.color }}>{message.username} : </span>
-                <span>{message.message}</span>
+              <li key={ i }>
+                <span
+                  style={ { color: message.color } }
+                >
+                  { message.username } :
+                </span>
+                <span>{ message.message }</span>
               </li>
             )
           })}
         </ul>
-        <input autoFocus placeholder="escribe un mensaje!" type="text"
-          ref="message" onKeyUp={this.handleEnter.bind(this)}></input>
+        <input
+          autoFocus
+          placeholder="escribe un mensaje!"
+          type="text"
+          ref="message"
+          onKeyUp={ this.handleEnter.bind(this) }
+        ></input>
       </div>
     )
   }
 }
 
-const app = document.getElementById("app")
+const app = document.getElementById('app')
 ReactDOM.render(<Chat />, app)
